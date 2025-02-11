@@ -1,4 +1,4 @@
-name: Increment Versio Number
+name: Increment Version Number
 
 on:
   workflow_dispatch:
@@ -26,9 +26,12 @@ jobs:
           echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | sudo tee /etc/apt/sources.list.d/caarlos0.list
           sudo apt update
           sudo apt install svu
-      - name: Do the bump
+      - name: Commit and Push Changes
         run: |
-          echo "Bumping the $INCREMENT"
-          svu $INCREMENT
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git tag $(svu $INCREMENT)
+          git push --tags
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INCREMENT: ${{ inputs.version_increment }}
