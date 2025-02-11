@@ -1,0 +1,17 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+  create:
+    tags:
+      - "*"
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
