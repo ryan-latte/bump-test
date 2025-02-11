@@ -1,0 +1,34 @@
+name: Increment Versio Number
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_increment:
+        description: "Increment"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  increment-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install SVU
+        run: |
+          echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | sudo tee /etc/apt/sources.list.d/caarlos0.list
+          sudo apt update
+          sudo apt install svu
+      - name: Do the bump
+        run: |
+          echo "Bumping the $INCREMENT"
+          svu $INCREMENT
+        env:
+          INCREMENT: ${{ inputs.version_increment }}
