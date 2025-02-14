@@ -18,6 +18,8 @@ jobs:
       - name: Releasing
         run: |
           echo "creating release"
-          env
+          echo "important: $IMPORTANT"
+          echo "something: $SOMETHING"
         env:
-          IMPORTANT: "{{ $.inputs.ASDF }}"
+          IMPORTANT: ${{ .inputs.ASDF }}
+          SOMETHING: ${{ github.event.inputs.ASDF }}
