@@ -5,10 +5,13 @@ on:
     workflows: ["Perform Tests"]
     types:
       - completed
+  push:
+    tags:
+      - "*"
 
 jobs:
   release:
-    if: ${{ github.event.workflow_run.conclusion == 'success' && (github.event.workflow_run.head_branch == 'main' || startsWith(github.event.workflow_run.head_branch, 'refs/tags/')) }}
+    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') || github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
