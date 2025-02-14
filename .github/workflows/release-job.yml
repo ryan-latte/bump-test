@@ -2,6 +2,10 @@ name: Release Job
 
 on:
   workflow_call:
+    inputs:
+      ASDF:
+        type: string
+        default: "nope"
 
 jobs:
   release:
@@ -15,3 +19,5 @@ jobs:
         run: |
           echo "creating release"
           env
+        env:
+          IMPORTANT: "{{ $.inputs.ASDF }}"
