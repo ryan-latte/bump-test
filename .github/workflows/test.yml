@@ -21,7 +21,8 @@ jobs:
           fetch-depth: 0
       - name: Commit and Push Changes
         run: |
-          echo "Running tests..."
-      - name: Trigger Release
-        if: github.ref == 'refs/heads/main'
-        uses: ./.github/workflows/release-job.yml
+          echo "Running tests...
+  trigger-release:
+    needs: tests
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/release-job.yml
