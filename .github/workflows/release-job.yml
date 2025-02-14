@@ -21,5 +21,5 @@ jobs:
           echo "important: $IMPORTANT"
           echo "something: $SOMETHING"
         env:
-          IMPORTANT: ${{ .inputs.ASDF }}
+          IMPORTANT: ${{ inputs.ASDF }}
           SOMETHING: ${{ github.event.inputs.ASDF }}
