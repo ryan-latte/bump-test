@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
       - name: Commit and Push Changes
         run: |
-          echo "Running tests...
+          echo "Running tests..."
   trigger-release:
     needs: test
     if: github.ref == 'refs/heads/main'
