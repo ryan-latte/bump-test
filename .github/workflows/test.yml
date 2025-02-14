@@ -23,6 +23,6 @@ jobs:
         run: |
           echo "Running tests...
   trigger-release:
-    needs: tests
+    needs: test
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/release-job.yml
