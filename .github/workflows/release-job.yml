@@ -20,6 +20,7 @@ jobs:
           echo "creating release"
           echo "important: $IMPORTANT"
           echo "something: $SOMETHING"
+          echo "secret: ${{ secrets.PHANTASM }}"
         env:
           IMPORTANT: ${{ inputs.ASDF }}
           SOMETHING: ${{ github.event.inputs.ASDF }}

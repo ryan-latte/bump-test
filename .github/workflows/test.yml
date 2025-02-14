@@ -26,5 +26,4 @@ jobs:
     needs: test
     if: ${{ github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release-job.yml
-    secrets:
-      ASDF: ${{ secrets.PHANTASM }}
+    secrets: inherit
