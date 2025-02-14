@@ -1,17 +1,20 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "*"
-  create:
-    tags:
-      - "*"
+  workflow_run:
+    workflows: ["Perform Tests"]
+    types:
+      - completed
+
 jobs:
-  goreleaser:
+  release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && (github.event.workflow_run.head_branch == 'main' || startsWith(github.event.workflow_run.head_branch, 'refs/tags/')) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Releasing
+        run: |
+          echo "creating release"
