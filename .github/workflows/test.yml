@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  increment-version:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
